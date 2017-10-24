@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 
 #include <GL/freeglut.h>
 
@@ -7,10 +8,10 @@ const int PIXEL_QUANTITY = 4; // Плотность пикселей
 // Вычисление количества пикселей (не общее, общее = sqrt(PIXEL_AMOUNT))
 const float PIXEL_AMOUNT = (float)WINDOW_SIZE / (float)PIXEL_QUANTITY;
 
-int **pixelStorage; // Массив всех отображаемый пикселей
+float **pixelStorage; // Массив всех отображаемый пикселей
 
 // Отрисовка одного пикселя
-void DrawPixel(float x, float y, float alpha) {
+void drawPixel(float x, float y, float alpha) {
 	float pixelSize = (1.0f / PIXEL_AMOUNT) * 2;
 	// Указываем цвет
 	glColor3f(alpha, alpha, alpha);
@@ -23,6 +24,15 @@ void DrawPixel(float x, float y, float alpha) {
 	glEnd();
 }
 
+void canvansDegradation() {
+	int x = std::rand() % (int)PIXEL_AMOUNT;
+	int y = std::rand() % (int)PIXEL_AMOUNT;
+
+	if (pixelStorage[x][y] > 0.0f) {
+		pixelStorage[x][y] = pixelStorage[x][y] - 0.2f;
+	}
+}
+
 // Обработка графики
 void graphicsLoop()
 {
@@ -32,10 +42,20 @@ void graphicsLoop()
 	{
 		for (size_t j = 0; j < PIXEL_AMOUNT; j++)
 		{
-			DrawPixel(i, j, pixelStorage[i][j]);
+			drawPixel(i, j, pixelStorage[i][j]);
 		}
 	}
+
+	canvansDegradation();
+
 	glutSwapBuffers();
+}
+
+// Таймер для обновления графики (раз в 1ms)
+void glutTimer(int value)
+{
+	glutPostRedisplay();
+	glutTimerFunc(1, glutTimer, 1);
 }
 
 // Обработка ввода с клавиатуры
@@ -50,14 +70,17 @@ int main(int argc, char **argv)
 {
 	std::cout << "Biting canvans test\n";
 
+	// Генерируем новое семя дял генератора
+	std::srand(unsigned(std::time(0)));
+
 	// Выделяем память массиву пикселей
-	pixelStorage = new int*[PIXEL_AMOUNT];
-	for (size_t i = 0; i < PIXEL_AMOUNT; i++)
+	pixelStorage = new float*[(int)PIXEL_AMOUNT];
+	for (size_t i = 0; i < (int)PIXEL_AMOUNT; i++)
 	{
-		pixelStorage[i] = new int[PIXEL_AMOUNT];
-		for (size_t j = 0; j <PIXEL_AMOUNT; j++)
+		pixelStorage[i] = new float[(int)PIXEL_AMOUNT];
+		for (size_t j = 0; j < (int)PIXEL_AMOUNT; j++)
 		{
-			pixelStorage[i][j] = 1;
+			pixelStorage[i][j] = 1.0f;
 		}
 	}
 
@@ -72,6 +95,7 @@ int main(int argc, char **argv)
 
 	glutDisplayFunc(graphicsLoop);
 	glutKeyboardFunc(keyboardHandler);
+	glutTimerFunc(1, glutTimer, 1);
 
 	// Запускаем циклы
 	glutMainLoop();
