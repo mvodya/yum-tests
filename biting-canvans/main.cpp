@@ -1,21 +1,30 @@
+п»ї/*
+	Biting Canvans
+	РћС‚СЂРёСЃРѕРІС‹РІР°РµС‚ РјР°СЃСЃРёРІ РїРёРєСЃРµР»РµР№. РЈ РєР°Р¶РґРѕРіРѕ РїРёРєСЃРµР»СЏ РµСЃС‚СЊ РІРµСЃ, РєРѕС‚РѕСЂС‹Р№ РІРёР·СѓР°Р»РёР·РёСЂСѓРµС‚СЃСЏ С†РІРµС‚РѕРј РѕС‚ С‡РµСЂРЅРѕРіРѕ (0) РґРѕ Р±РµР»РѕРіРѕ (1)
+	Р Р°Р· РІ С‚Р°РєС‚ (1ms) РѕС‚ СЂР°РЅРґРѕРјРЅРѕРіРѕ РїРёРєСЃРµР»СЏ РѕС‚РЅРёРјР°РµС‚СЃСЏ 0.2 РІРµСЃР°. РўР°РєРёРј РѕР±СЂР°Р·РѕРј С…РѕР»СЃС‚ РґРµРіСЂР°РґРёСЂСѓРµС‚.
+	РџРѕСЃС‚РµРїРµРЅРЅРѕ С…РѕР»СЃС‚ РЅР°С‡РёРЅР°РµС‚ РїСЂРѕРїР°РґР°С‚СЊ Рё РІС‹РіР»СЏРґРёС‚СЊ РєР°Рє РєРѕСЃРјРѕСЃ :3
+
+	by @mvodya 2017
+*/
+
 #include <iostream>
 #include <ctime>
 
 #include <GL/freeglut.h>
 
-const int WINDOW_SIZE = 800; // Размер окна
-const int PIXEL_QUANTITY = 4; // Плотность пикселей
-// Вычисление количества пикселей (не общее, общее = sqrt(PIXEL_AMOUNT))
+const int WINDOW_SIZE = 800; // Р Р°Р·РјРµСЂ РѕРєРЅР°
+const int PIXEL_QUANTITY = 4; // РџР»РѕС‚РЅРѕСЃС‚СЊ РїРёРєСЃРµР»РµР№
+// Р’С‹С‡РёСЃР»РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° РїРёРєСЃРµР»РµР№ (РЅРµ РѕР±С‰РµРµ, РѕР±С‰РµРµ = sqrt(PIXEL_AMOUNT))
 const float PIXEL_AMOUNT = (float)WINDOW_SIZE / (float)PIXEL_QUANTITY;
 
-float **pixelStorage; // Массив всех отображаемый пикселей
+float **pixelStorage; // РњР°СЃСЃРёРІ РІСЃРµС… РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… РїРёРєСЃРµР»РµР№
 
-// Отрисовка одного пикселя
+// РћС‚СЂРёСЃРѕРІРєР° РѕРґРЅРѕРіРѕ РїРёРєСЃРµР»СЏ
 void drawPixel(float x, float y, float alpha) {
 	float pixelSize = (1.0f / PIXEL_AMOUNT) * 2;
-	// Указываем цвет
+	// РЈРєР°Р·С‹РІР°РµРј С†РІРµС‚
 	glColor3f(alpha, alpha, alpha);
-	// Отрисовываем квадрат
+	// РћС‚СЂРёСЃРѕРІС‹РІР°РµРј РєРІР°РґСЂР°С‚
 	glBegin(GL_QUADS);
 		glVertex2f(-1.0f + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 0 1
 		glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 1 1
@@ -24,6 +33,7 @@ void drawPixel(float x, float y, float alpha) {
 	glEnd();
 }
 
+// Р Р°РЅРґРѕРјРЅРѕРµ РїРѕР¶РёСЂР°РЅРёРµ РїРёРєСЃРµР»РµР№
 void canvansDegradation() {
 	int x = std::rand() % (int)PIXEL_AMOUNT;
 	int y = std::rand() % (int)PIXEL_AMOUNT;
@@ -33,7 +43,7 @@ void canvansDegradation() {
 	}
 }
 
-// Обработка графики
+// РћР±СЂР°Р±РѕС‚РєР° РіСЂР°С„РёРєРё
 void graphicsLoop()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -51,18 +61,18 @@ void graphicsLoop()
 	glutSwapBuffers();
 }
 
-// Таймер для обновления графики (раз в 1ms)
+// РўР°Р№РјРµСЂ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ РіСЂР°С„РёРєРё (СЂР°Р· РІ 1ms)
 void glutTimer(int value)
 {
 	glutPostRedisplay();
 	glutTimerFunc(1, glutTimer, 1);
 }
 
-// Обработка ввода с клавиатуры
+// РћР±СЂР°Р±РѕС‚РєР° РІРІРѕРґР° СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
 void keyboardHandler(unsigned char key, int x, int y)
 {
 	std::cout << "Key detected: " << key << std::endl;
-	if (key == 27) // Выход по ESC
+	if (key == 27) // Р’С‹С…РѕРґ РїРѕ ESC
 		exit(EXIT_SUCCESS);
 }
 
@@ -70,10 +80,10 @@ int main(int argc, char **argv)
 {
 	std::cout << "Biting canvans test\n";
 
-	// Генерируем новое семя дял генератора
+	// Р“РµРЅРµСЂРёСЂСѓРµРј РЅРѕРІРѕРµ СЃРµРјСЏ РґСЏР» РіРµРЅРµСЂР°С‚РѕСЂР°
 	std::srand(unsigned(std::time(0)));
 
-	// Выделяем память массиву пикселей
+	// Р’С‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РјР°СЃСЃРёРІСѓ РїРёРєСЃРµР»РµР№
 	pixelStorage = new float*[(int)PIXEL_AMOUNT];
 	for (size_t i = 0; i < (int)PIXEL_AMOUNT; i++)
 	{
@@ -84,7 +94,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	// Инициализация графики
+	// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіСЂР°С„РёРєРё
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100, 100);
@@ -97,7 +107,7 @@ int main(int argc, char **argv)
 	glutKeyboardFunc(keyboardHandler);
 	glutTimerFunc(1, glutTimer, 1);
 
-	// Запускаем циклы
+	// Р—Р°РїСѓСЃРєР°РµРј С†РёРєР»С‹
 	glutMainLoop();
 
 	return 0;
