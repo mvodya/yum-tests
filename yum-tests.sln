@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "biting-canvans", "biting-canvans\biting-canvans.vcxproj", "{211DEBD1-E057-4357-AD60-429BF85F997D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "magic-spiral", "magic-spiral\magic-spiral.vcxproj", "{17640E84-73CC-4EED-90A2-D2721A652D4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{211DEBD1-E057-4357-AD60-429BF85F997D}.Release|x64.Build.0 = Release|x64
 		{211DEBD1-E057-4357-AD60-429BF85F997D}.Release|x86.ActiveCfg = Release|Win32
 		{211DEBD1-E057-4357-AD60-429BF85F997D}.Release|x86.Build.0 = Release|Win32
+		{17640E84-73CC-4EED-90A2-D2721A652D4F}.Debug|x64.ActiveCfg = Debug|x64
+		{17640E84-73CC-4EED-90A2-D2721A652D4F}.Debug|x64.Build.0 = Debug|x64
+		{17640E84-73CC-4EED-90A2-D2721A652D4F}.Debug|x86.ActiveCfg = Debug|Win32
+		{17640E84-73CC-4EED-90A2-D2721A652D4F}.Debug|x86.Build.0 = Debug|Win32
+		{17640E84-73CC-4EED-90A2-D2721A652D4F}.Release|x64.ActiveCfg = Release|x64
+		{17640E84-73CC-4EED-90A2-D2721A652D4F}.Release|x64.Build.0 = Release|x64
+		{17640E84-73CC-4EED-90A2-D2721A652D4F}.Release|x86.ActiveCfg = Release|Win32
+		{17640E84-73CC-4EED-90A2-D2721A652D4F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
