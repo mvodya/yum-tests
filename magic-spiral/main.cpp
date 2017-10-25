@@ -1,23 +1,33 @@
+Ôªø/*
+	Magic spiral
+	–†–∏—Å—É–µ—Ç —Å–ø–∏—Ä–∞–ª—å –∏–∑ –ø–∏–∫—Å–µ–ª–µ–π –∏ –≤—Ä–∞—â–∞–µ—Ç –µ–µ.
+	–ö–∞–∂–¥—ã–π —Ç–∞–∫—Ç –æ—Ç—Ä–∏—Å–æ–≤—ã–≤–∞–µ—Ç i-–æ–µ –∫–æ–ª–∏—á–µ—Å—Ç–≤–æ —Ç–æ—á–µ–∫ A = (a;b), –≥–¥–µ
+		a = cos(i + q) * i
+		b = cos(i + q) * i
+	–≥–¥–µ q - —Å–º–µ—â–µ–Ω–∏–µ –¥–ª—è –≤—Ä–∞—â–µ–Ω–∏—è, –∞ i - –Ω–æ–º–µ—Ä —Ç–æ—á–∫–∏ (—Ç.–µ. —à–∞–≥)
+
+	by @mvodya 2017
+*/
 #include <iostream>
 
 #include <GL/freeglut.h>
 
-const int WINDOW_SIZE = 800; // –‡ÁÏÂ ÓÍÌ‡
-const int PIXEL_QUANTITY = 4; // œÎÓÚÌÓÒÚ¸ ÔËÍÒÂÎÂÈ
-// ¬˚˜ËÒÎÂÌËÂ ÍÓÎË˜ÂÒÚ‚‡ ÔËÍÒÂÎÂÈ (ÌÂ Ó·˘ÂÂ, Ó·˘ÂÂ = sqrt(PIXEL_AMOUNT))
+const int WINDOW_SIZE = 800; // –†–∞–∑–º–µ—Ä –æ–∫–Ω–∞
+const int PIXEL_QUANTITY = 4; // –ü–ª–æ—Ç–Ω–æ—Å—Ç—å –ø–∏–∫—Å–µ–ª–µ–π
+// –í—ã—á–∏—Å–ª–µ–Ω–∏–µ –∫–æ–ª–∏—á–µ—Å—Ç–≤–∞ –ø–∏–∫—Å–µ–ª–µ–π (–Ω–µ –æ–±—â–µ–µ, –æ–±—â–µ–µ = sqrt(PIXEL_AMOUNT))
 const float PIXEL_AMOUNT = (float)WINDOW_SIZE / (float)PIXEL_QUANTITY;
 
-const int SPIRAL_PIXELS = 100; //  ÓÎË˜ÂÒ‚Ó ÔËÍÒÂÎÂÈ ‰Îˇ ÒÔË‡ÎË
-const float SPIRAL_ANGLE_OFFSET_STEP = 0.05f; // —ÏÂ˘ÂÌËÂ Û„Î‡ ÒÔË‡ÎË Á‡ Ú‡ÍÚ
-const float SPIRAL_STEP = 0.01f; // ÿ‡„ ÓÚËÒÓ‚ÍË ÒÔË‡ÎË
-const float Pi = 3.14159f; // ◊ËÒÎÓ Pi
+const int SPIRAL_PIXELS = 100; // –ö–æ–ª–∏—á–µ—Å–≤–æ –ø–∏–∫—Å–µ–ª–µ–π –¥–ª—è —Å–ø–∏—Ä–∞–ª–∏
+const float SPIRAL_ANGLE_OFFSET_STEP = 0.05f; // –°–º–µ—â–µ–Ω–∏–µ —É–≥–ª–∞ —Å–ø–∏—Ä–∞–ª–∏ –∑–∞ —Ç–∞–∫—Ç
+const float SPIRAL_STEP = 0.01f; // –®–∞–≥ –æ—Ç—Ä–∏—Å–æ–≤–∫–∏ —Å–ø–∏—Ä–∞–ª–∏
+const float Pi = 3.14159f; // –ß–∏—Å–ª–æ Pi
 
-// ŒÚËÒÓ‚Í‡ Ó‰ÌÓ„Ó ÔËÍÒÂÎˇ
-void drawPixel(float x, float y, float alpha) {
+// –û—Ç—Ä–∏—Å–æ–≤–∫–∞ –æ–¥–Ω–æ–≥–æ –ø–∏–∫—Å–µ–ª—è
+void drawPixel(float x, float y, float color) {
 	float pixelSize = (1.0f / PIXEL_AMOUNT) * 2;
-	// ”Í‡Á˚‚‡ÂÏ ˆ‚ÂÚ
-	glColor3f(alpha, alpha, alpha);
-	// ŒÚËÒÓ‚˚‚‡ÂÏ Í‚‡‰‡Ú
+	// –£–∫–∞–∑—ã–≤–∞–µ–º —Ü–≤–µ—Ç
+	glColor3f(color, color, color);
+	// –û—Ç—Ä–∏—Å–æ–≤—ã–≤–∞–µ–º –∫–≤–∞–¥—Ä–∞—Ç
 	glBegin(GL_QUADS);
 	glVertex2f(-1.0f + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 0 1
 	glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 1 1
@@ -26,36 +36,36 @@ void drawPixel(float x, float y, float alpha) {
 	glEnd();
 }
 
-float AngleOffset = 0.0f; // »ÚÂ‡ÚÓ ÒÏÂ˘ÂÌËˇ ÒÔË‡ÎË
+float AngleOffset = 0.0f; // –ò—Ç–µ—Ä–∞—Ç–æ—Ä —Å–º–µ—â–µ–Ω–∏—è —Å–ø–∏—Ä–∞–ª–∏
 
-// Œ·‡·ÓÚÍ‡ „‡ÙËÍË
+// –û–±—Ä–∞–±–æ—Ç–∫–∞ –≥—Ä–∞—Ñ–∏–∫–∏
 void graphicsLoop()
 {
-	AngleOffset += SPIRAL_ANGLE_OFFSET_STEP; // —ÏÂ˘‡ÂÏ ÒÔË‡Î¸
-	if (AngleOffset > 2*Pi) AngleOffset = 0; // Œ·ÌÛÎˇÂÏ ÒÏÂ˘ÂÌËÂ, ÔË ‰ÓÒÚËÊÂÌËË 2Pi 
+	AngleOffset += SPIRAL_ANGLE_OFFSET_STEP; // –°–º–µ—â–∞–µ–º —Å–ø–∏—Ä–∞–ª—å
+	if (AngleOffset > 2*Pi) AngleOffset = 0; // –û–±–Ω—É–ª—è–µ–º —Å–º–µ—â–µ–Ω–∏–µ, –ø—Ä–∏ –¥–æ—Å—Ç–∏–∂–µ–Ω–∏–∏ 2Pi 
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (float i = 0; i < SPIRAL_PIXELS; i+=SPIRAL_STEP)
 	{
-		drawPixel(PIXEL_AMOUNT/2+ cos(i + AngleOffset) * i, PIXEL_AMOUNT/2 + sin(i + AngleOffset) * i, 1);
+		drawPixel(PIXEL_AMOUNT/2 + cos(i + AngleOffset) * i, PIXEL_AMOUNT/2 + sin(i + AngleOffset) * i, i);
 	}
 
 	glutSwapBuffers();
 }
 
-// “‡ÈÏÂ ‰Îˇ Ó·ÌÓ‚ÎÂÌËˇ „‡ÙËÍË (‡Á ‚ 1ms)
+// –¢–∞–π–º–µ—Ä –¥–ª—è –æ–±–Ω–æ–≤–ª–µ–Ω–∏—è –≥—Ä–∞—Ñ–∏–∫–∏ (—Ä–∞–∑ –≤ 1ms)
 void glutTimer(int value)
 {
 	glutPostRedisplay();
 	glutTimerFunc(1, glutTimer, 1);
 }
 
-// Œ·‡·ÓÚÍ‡ ‚‚Ó‰‡ Ò ÍÎ‡‚Ë‡ÚÛ˚
+// –û–±—Ä–∞–±–æ—Ç–∫–∞ –≤–≤–æ–¥–∞ —Å –∫–ª–∞–≤–∏–∞—Ç—É—Ä—ã
 void keyboardHandler(unsigned char key, int x, int y)
 {
 	std::cout << "Key detected: " << key << std::endl;
-	if (key == 27) // ¬˚ıÓ‰ ÔÓ ESC
+	if (key == 27) // –í—ã—Ö–æ–¥ –ø–æ ESC
 		exit(EXIT_SUCCESS);
 }
 
@@ -63,7 +73,7 @@ int main(int argc, char **argv)
 {
 	std::cout << "Magic spiral test\n";
 
-	// »ÌËˆË‡ÎËÁ‡ˆËˇ „‡ÙËÍË
+	// –ò–Ω–∏—Ü–∏–∞–ª–∏–∑–∞—Ü–∏—è –≥—Ä–∞—Ñ–∏–∫–∏
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100, 100);
@@ -76,7 +86,7 @@ int main(int argc, char **argv)
 	glutKeyboardFunc(keyboardHandler);
 	glutTimerFunc(1, glutTimer, 1);
 
-	// «‡ÔÛÒÍ‡ÂÏ ˆËÍÎ˚
+	// –ó–∞–ø—É—Å–∫–∞–µ–º —Ü–∏–∫–ª—ã
 	glutMainLoop();
 
 	return 0;
