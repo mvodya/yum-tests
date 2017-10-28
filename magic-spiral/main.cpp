@@ -48,8 +48,8 @@ void graphicsLoop()
 
 	for (float i = 0; i < SPIRAL_PIXELS; i+=SPIRAL_STEP)
 	{
-		int x = PIXEL_AMOUNT / 2 + cos(i + AngleOffset) * i; // X position
-		int y = PIXEL_AMOUNT / 2 + sin(i + AngleOffset) * i; // Y position
+		float x = PIXEL_AMOUNT / 2 + cos(i + AngleOffset) * i; // X position
+		float y = PIXEL_AMOUNT / 2 + sin(i + AngleOffset) * i; // Y position
 		drawPixel(x, y, i); // Отрисовываем нужный пиксель
 	}
 
