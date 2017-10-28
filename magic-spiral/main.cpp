@@ -9,6 +9,7 @@
 	by @mvodya 2017
 */
 #include <iostream>
+
 #include <GL/freeglut.h>
 
 const int WINDOW_SIZE = 800; // Размер окна
@@ -28,10 +29,10 @@ void drawPixel(float x, float y, float color) {
 	glColor3f(color, color, color);
 	// Отрисовываем квадрат
 	glBegin(GL_QUADS);
-	glVertex2f(-1.0f + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 0 1
-	glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 1 1
-	glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - (pixelSize * y)); // 1 0
-	glVertex2f(-1.0f + (pixelSize * x), 1.0f - (pixelSize * y)); // 0 0
+		glVertex2f(-1.0f + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 0 1
+		glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 1 1
+		glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - (pixelSize * y)); // 1 0
+		glVertex2f(-1.0f + (pixelSize * x), 1.0f - (pixelSize * y)); // 0 0
 	glEnd();
 }
 
@@ -47,7 +48,9 @@ void graphicsLoop()
 
 	for (float i = 0; i < SPIRAL_PIXELS; i+=SPIRAL_STEP)
 	{
-		drawPixel(PIXEL_AMOUNT/2 + cos(i + AngleOffset) * i, PIXEL_AMOUNT/2 + sin(i + AngleOffset) * i, i); // Отрисовываем нужный пиксель
+		int x = PIXEL_AMOUNT / 2 + cos(i + AngleOffset) * i; // X position
+		int y = PIXEL_AMOUNT / 2 + sin(i + AngleOffset) * i; // Y position
+		drawPixel(x, y, i); // Отрисовываем нужный пиксель
 	}
 
 	glutSwapBuffers();
