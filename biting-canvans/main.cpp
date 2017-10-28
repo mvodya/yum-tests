@@ -39,7 +39,7 @@ void canvansDegradation() {
 	int y = std::rand() % (int)PIXEL_AMOUNT;
 
 	if (pixelStorage[x][y] > 0.0f) {
-		pixelStorage[x][y] = pixelStorage[x][y] - 0.2f;
+		pixelStorage[x][y] = pixelStorage[x][y] - 0.2f; // Убиваем немного (на 0.2) пиксель
 	}
 }
 
@@ -52,7 +52,7 @@ void graphicsLoop()
 	{
 		for (size_t j = 0; j < PIXEL_AMOUNT; j++)
 		{
-			drawPixel(i, j, pixelStorage[i][j]);
+			drawPixel(i, j, pixelStorage[i][j]); // Отрисовываем нужный пиксель
 		}
 	}
 
@@ -64,14 +64,14 @@ void graphicsLoop()
 // Таймер для обновления графики (раз в 1ms)
 void glutTimer(int value)
 {
-	glutPostRedisplay();
-	glutTimerFunc(1, glutTimer, 1);
+	glutPostRedisplay(); // Обновляем экран (тик)
+	glutTimerFunc(1, glutTimer, 1); // Снова запускаем таймер
 }
 
 // Обработка ввода с клавиатуры
 void keyboardHandler(unsigned char key, int x, int y)
 {
-	std::cout << "Key detected: " << key << std::endl;
+	std::cout << "Key detected: " << key << std::endl; // Выводим ввод с клавиатуры (просто так)
 	if (key == 27) // Выход по ESC
 		exit(EXIT_SUCCESS);
 }
