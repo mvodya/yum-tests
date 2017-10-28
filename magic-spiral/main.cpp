@@ -9,7 +9,6 @@
 	by @mvodya 2017
 */
 #include <iostream>
-
 #include <GL/freeglut.h>
 
 const int WINDOW_SIZE = 800; // Размер окна
@@ -44,11 +43,11 @@ void graphicsLoop()
 	AngleOffset += SPIRAL_ANGLE_OFFSET_STEP; // Смещаем спираль
 	if (AngleOffset > 2*Pi) AngleOffset = 0; // Обнуляем смещение, при достижении 2Pi 
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Чистим буфер
 
 	for (float i = 0; i < SPIRAL_PIXELS; i+=SPIRAL_STEP)
 	{
-		drawPixel(PIXEL_AMOUNT/2 + cos(i + AngleOffset) * i, PIXEL_AMOUNT/2 + sin(i + AngleOffset) * i, i);
+		drawPixel(PIXEL_AMOUNT/2 + cos(i + AngleOffset) * i, PIXEL_AMOUNT/2 + sin(i + AngleOffset) * i, i); // Отрисовываем нужный пиксель
 	}
 
 	glutSwapBuffers();
@@ -57,14 +56,14 @@ void graphicsLoop()
 // Таймер для обновления графики (раз в 1ms)
 void glutTimer(int value)
 {
-	glutPostRedisplay();
-	glutTimerFunc(1, glutTimer, 1);
+	glutPostRedisplay(); // Обновляем экран (тик)
+	glutTimerFunc(1, glutTimer, 1); // Снова запускаем таймер
 }
 
 // Обработка ввода с клавиатуры
 void keyboardHandler(unsigned char key, int x, int y)
 {
-	std::cout << "Key detected: " << key << std::endl;
+	std::cout << "Key detected: " << key << std::endl; // Выводим ввод с клавиатуры (просто так)
 	if (key == 27) // Выход по ESC
 		exit(EXIT_SUCCESS);
 }
