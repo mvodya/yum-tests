@@ -1,37 +1,19 @@
 ﻿/*
 	Space jump
 */
-#include <iostream>
-
-#include <GL/freeglut.h>
-
 #include "spacestar.h"
 
-const int WINDOW_SIZE = 800; // Размер окна
-const int PIXEL_QUANTITY = 4; // Плотность пикселей
-// Вычисление количества пикселей (не общее, общее = sqrt(PIXEL_AMOUNT))
-const float PIXEL_AMOUNT = (float)WINDOW_SIZE / (float)PIXEL_QUANTITY;
-
-SpaceStar *stars;
-
-// Отрисовка одного пикселя
-void drawPixel(float x, float y, float color) {
-	float pixelSize = (1.0f / PIXEL_AMOUNT) * 2;
-	// Указываем цвет
-	glColor3f(color, color, color);
-	// Отрисовываем квадрат
-	glBegin(GL_QUADS);
-		glVertex2f(-1.0f + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 0 1
-		glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 1 1
-		glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - (pixelSize * y)); // 1 0
-		glVertex2f(-1.0f + (pixelSize * x), 1.0f - (pixelSize * y)); // 0 0
-	glEnd();
-}
+SpaceStar *stars; // Массив звезд
 
 // Обработка графики
 void graphicsLoop()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Чистим буфер
+	for (size_t i = 0; i < STARS_QUANTITY; i++)
+	{
+		stars[i].update();
+		stars[i].draw();
+	}
 	glutSwapBuffers();
 }
 
@@ -52,6 +34,8 @@ void keyboardHandler(unsigned char key, int x, int y)
 
 int main(int argc, char **argv) {
 	std::cout << "Space jump test\n";
+
+	stars = new SpaceStar[STARS_QUANTITY];
 
 	// Инициализация графики
 	glutInit(&argc, argv);
