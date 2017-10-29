@@ -5,6 +5,8 @@
 
 #include <GL/freeglut.h>
 
+#include "spacestar.h"
+
 const int WINDOW_SIZE = 800; // Размер окна
 const int PIXEL_QUANTITY = 4; // Плотность пикселей
 // Вычисление количества пикселей (не общее, общее = sqrt(PIXEL_AMOUNT))
