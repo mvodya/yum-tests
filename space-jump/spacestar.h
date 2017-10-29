@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class SpaceStart {
+class SpaceStar {
 private:
 	float x_, y_; // Координаты точки (для отображения)
 	float progress_; // Текущий прогресс для функции отображения

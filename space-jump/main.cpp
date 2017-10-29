@@ -12,6 +12,8 @@ const int PIXEL_QUANTITY = 4; // Плотность пикселей
 // Вычисление количества пикселей (не общее, общее = sqrt(PIXEL_AMOUNT))
 const float PIXEL_AMOUNT = (float)WINDOW_SIZE / (float)PIXEL_QUANTITY;
 
+SpaceStar *stars;
+
 // Отрисовка одного пикселя
 void drawPixel(float x, float y, float color) {
 	float pixelSize = (1.0f / PIXEL_AMOUNT) * 2;
