@@ -37,6 +37,9 @@ int main(int argc, char **argv) {
 
 	stars = new SpaceStar[STARS_QUANTITY];
 
+	// Генерируем новое семя дял генератора
+	std::srand(unsigned(std::time(0)));
+
 	// Инициализация графики
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
