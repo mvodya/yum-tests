@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(WINDOW_SIZE, WINDOW_SIZE);
-	glutCreateWindow("Yum - Magic spiral test");
+	glutCreateWindow("Yum - Space jump test");
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
