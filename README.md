@@ -3,8 +3,12 @@
 
 ### biting-canvans
 Отрисовывает массив пикселей. У каждого пикселя есть вес, который визуализируется цветом от черного (0) до белого (1). Раз в такт (1ms) от рандомного пикселя отнимается 0.2 веса. Таким образом холст деградирует. Постепенно холст пропадает и начинает выглядить как космос :3
-![biting-canvans](screenshots/biting-canvans.gif)
+![biting-canvans](https://i.imgur.com/TUdFQx3.gif)
 
 ### magic-spiral
 Рисует спираль из пикселей и вращает ее.
-![biting-canvans](screenshots/magic-spiral.gif)
+![biting-canvans](https://i.imgur.com/2H7Lp1v.gif)
+
+### space-jump
+Рисует пиксели и откидывает их от центра.
+![biting-canvans](https://i.imgur.com/iCMnS5M.gif)
