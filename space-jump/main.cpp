@@ -1,5 +1,8 @@
 ﻿/*
 	Space jump
+	Рисует пиксели и откидывает их от центра.
+
+	by @mvodya 2017
 */
 #include "spacestar.h"
 
@@ -11,8 +14,8 @@ void graphicsLoop()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Чистим буфер
 	for (size_t i = 0; i < STARS_QUANTITY; i++)
 	{
-		stars[i].update();
-		stars[i].draw();
+		stars[i].update(); // Обновляем звезды
+		stars[i].draw();   // ...и отрисовываем их
 	}
 	glutSwapBuffers();
 }
