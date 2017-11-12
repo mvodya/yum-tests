@@ -11,7 +11,7 @@
 
 const int WINDOW_SIZE = 800;  // Размер окна
 const int PIXEL_QUANTITY = 4; // Плотность пикселей
-// Вычисление количества пикселей (не общее, общее = sqrt(PIXEL_AMOUNT))
+// Вычисление количества пикселей по одной стороне
 const float PIXEL_AMOUNT = (float)WINDOW_SIZE / (float)PIXEL_QUANTITY;
 
 // Отрисовка одного пикселя
