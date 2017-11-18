@@ -1,32 +1,18 @@
 ﻿/*
 	Really rain
-	
+	Рисует пиксельный дождик
+
 	by @mvodya 2017
 */
 
 #include <iostream>
-#include <ctime>
 
 #include <GL/freeglut.h>
+#include "raindrop.h"
 
-const int WINDOW_SIZE = 800;  // Размер окна
-const int PIXEL_QUANTITY = 4; // Плотность пикселей
-// Вычисление количества пикселей по одной стороне
-const float PIXEL_AMOUNT = (float)WINDOW_SIZE / (float)PIXEL_QUANTITY;
+const int RAIN_DROPS_COUNT = 100; // Количесвто
 
-// Отрисовка одного пикселя
-void drawPixel(float x, float y, float color) {
-	float pixelSize = (1.0f / PIXEL_AMOUNT) * 2;
-	// Указываем цвет
-	glColor3f(color, color, color);
-	// Отрисовываем квадрат
-	glBegin(GL_QUADS);
-	glVertex2f(-1.0f + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 0 1
-	glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 1 1
-	glVertex2f(-1.0f + pixelSize + (pixelSize * x), 1.0f - (pixelSize * y)); // 1 0
-	glVertex2f(-1.0f + (pixelSize * x), 1.0f - (pixelSize * y)); // 0 0
-	glEnd();
-}
+RainDrop *rainDrops;
 
 // Обработка графики
 void graphicsLoop()
@@ -34,7 +20,6 @@ void graphicsLoop()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Чистим буфер
 
 	// TODO: Все самое основное
-	drawPixel(1, 1, 1);
 
 	glutSwapBuffers();
 }
@@ -58,6 +43,9 @@ int main(int argc, char **argv)
 {
 	std::cout << "Really rain\n";
 
+	// Выделяем память каплям дождя
+	rainDrops = new RainDrop[RAIN_DROPS_COUNT];
+	 
 	// Инициализация графики
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
