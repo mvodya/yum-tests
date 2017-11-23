@@ -15,4 +15,4 @@
 
 ## really rain
 Рисует пиксельный дождик.
-![really-rain](https://i.imgur.com/vr7Lcbf.gifv)
+![really-rain](https://i.imgur.com/vr7Lcbf.gif)
