@@ -16,6 +16,7 @@ RainDrop *rainDrops;
 void graphicsLoop()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Чистим буфер
+	glClearColor(0.13f, 0.15f, 0.2f, 0);
 
 	for (size_t i = 0; i < RAIN_DROPS_COUNT; i++)
 	{
