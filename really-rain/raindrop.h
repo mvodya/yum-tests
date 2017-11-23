@@ -11,7 +11,7 @@ const int RAIN_DROPS_COUNT = 200; // Количесвто капель
 void drawPixel(float x, float y, float color) {
 	float pixelSize = (1.0f / PIXEL_AMOUNT) * 2;
 	// Указываем цвет
-	glColor4f(0.3f, 0.3f, 1.0f, color);
+	glColor4f(0.43f, 0.65f, 1.0f, color);
 	// Отрисовываем квадрат
 	glBegin(GL_QUADS);
 	glVertex2f(-1.0f + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 0 1
