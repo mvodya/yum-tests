@@ -36,7 +36,7 @@ public:
 		drawPixel(x_, y_, 1.0f); 
 	};
 	void update() { // Обновляем каплю
-		y_ = y_ - 1;
+		y_ = y_ + 1;
 		if (y_ > PIXEL_AMOUNT)
 			reSpawn();
 	};

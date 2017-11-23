@@ -19,6 +19,12 @@ void graphicsLoop()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Чистим буфер
 
+	for (size_t i = 0; i < RAIN_DROPS_COUNT; i++)
+	{
+		rainDrops[i].draw();
+		rainDrops[i].update();
+	}
+
 	// TODO: Все самое основное
 
 	glutSwapBuffers();
