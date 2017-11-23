@@ -11,7 +11,7 @@ const int RAIN_DROPS_COUNT = 200; // Количесвто капель
 void drawPixel(float x, float y, float color) {
 	float pixelSize = (1.0f / PIXEL_AMOUNT) * 2;
 	// Указываем цвет
-	glColor3f(color, color, color);
+	glColor4f(0.3f, 0.3f, 1.0f, color);
 	// Отрисовываем квадрат
 	glBegin(GL_QUADS);
 	glVertex2f(-1.0f + (pixelSize * x), 1.0f - pixelSize - (pixelSize * y)); // 0 1
@@ -25,12 +25,13 @@ class RainDrop {
 private:
 	int size_;
 	int x_, y_;
-	int length_;
+	int length_, speed_;
 public:
 	void reSpawn() {
 		x_ = std::rand() % (int)PIXEL_AMOUNT;
 		y_ = 0;
-		length_ = std::rand() % 100 + 20;
+		length_ = std::rand() % 40 + 20;
+		speed_ = std::rand() % 3 + 1;
 	}
 	RainDrop() { // Конструктор
 		reSpawn();
@@ -43,7 +44,7 @@ public:
 		}
 	};
 	void update() { // Обновляем каплю
-		y_ = y_ + 1;
+		y_ = y_ + 1 * speed_;
 		if (y_ > PIXEL_AMOUNT + length_)
 			reSpawn();
 	};
