@@ -10,7 +10,7 @@
 #include <GL/freeglut.h>
 #include "raindrop.h"
 
-RainDrop *rainDrops;
+RainDrop *rainDrops; // Массив капель (указатель на будущий массив)
 
 // Обработка графики
 void graphicsLoop()
@@ -20,11 +20,9 @@ void graphicsLoop()
 
 	for (size_t i = 0; i < RAIN_DROPS_COUNT; i++)
 	{
-		rainDrops[i].draw();
-		rainDrops[i].update();
+		rainDrops[i].draw(); // Рисуем капли
+		rainDrops[i].update(); // Обновляем капли
 	}
-
-	// TODO: Все самое основное
 
 	glutSwapBuffers();
 }
@@ -48,7 +46,7 @@ int main(int argc, char **argv)
 {
 	std::cout << "Really rain\n";
 
-	// Выделяем память каплям дождя
+	// Выделяем память каплям дождя (и генерируем первые капли конструктором)
 	rainDrops = new RainDrop[RAIN_DROPS_COUNT];
 	 
 	// Инициализация графики

@@ -27,25 +27,32 @@ private:
 	int x_, y_;
 	int length_, speed_;
 public:
+	// Регенерация
 	void reSpawn() {
-		x_ = std::rand() % (int)PIXEL_AMOUNT;
+		x_ = std::rand() % (int)PIXEL_AMOUNT; // Рандомная горизонтальная позиция
 		y_ = 0;
-		length_ = std::rand() % 40 + 20;
-		speed_ = std::rand() % 3 + 1;
+		length_ = std::rand() % 40 + 20; // Рандомная длинна
+		speed_ = std::rand() % 3 + 1; // Рандомная скорость
 	}
-	RainDrop() { // Конструктор
+
+	// Конструктор
+	RainDrop() {
 		reSpawn();
 	};
-	void draw() { // Отрисовываем
+
+	// Отрисовываем
+	void draw() {
 		drawPixel(x_, y_, 1.0f);
 		for (size_t i = 1; i < length_; i++)
 		{
 			drawPixel(x_, y_ - i, 1.0f - ((1.0f / (float)length_) * i));
 		}
 	};
-	void update() { // Обновляем каплю
+	
+	// Обновление
+	void update() {
 		y_ = y_ + 1 * speed_;
-		if (y_ > PIXEL_AMOUNT + length_)
-			reSpawn();
+		if (y_ > PIXEL_AMOUNT + length_) // Если вышла за пределы экрана
+			reSpawn(); // Регенерируем каплю
 	};
 };
