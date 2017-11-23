@@ -5,6 +5,7 @@ const int WINDOW_SIZE = 800;  // Размер окна
 const int PIXEL_QUANTITY = 4; // Плотность пикселей
 // Вычисление количества пикселей по одной стороне
 const float PIXEL_AMOUNT = (float)WINDOW_SIZE / (float)PIXEL_QUANTITY;
+const int RAIN_DROPS_COUNT = 200; // Количесвто капель
 
 // Отрисовка одного пикселя
 void drawPixel(float x, float y, float color) {
@@ -24,20 +25,26 @@ class RainDrop {
 private:
 	int size_;
 	int x_, y_;
+	int length_;
 public:
 	void reSpawn() {
 		x_ = std::rand() % (int)PIXEL_AMOUNT;
 		y_ = 0;
+		length_ = std::rand() % 100 + 20;
 	}
 	RainDrop() { // Конструктор
 		reSpawn();
 	};
 	void draw() { // Отрисовываем
-		drawPixel(x_, y_, 1.0f); 
+		drawPixel(x_, y_, 1.0f);
+		for (size_t i = 1; i < length_; i++)
+		{
+			drawPixel(x_, y_ - i, 1.0f - ((1.0f / (float)length_) * i));
+		}
 	};
 	void update() { // Обновляем каплю
 		y_ = y_ + 1;
-		if (y_ > PIXEL_AMOUNT)
+		if (y_ > PIXEL_AMOUNT + length_)
 			reSpawn();
 	};
 };

@@ -10,8 +10,6 @@
 #include <GL/freeglut.h>
 #include "raindrop.h"
 
-const int RAIN_DROPS_COUNT = 100; // Количесвто
-
 RainDrop *rainDrops;
 
 // Обработка графики
