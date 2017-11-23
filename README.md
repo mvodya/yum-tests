@@ -7,8 +7,12 @@
 
 ### magic-spiral
 Рисует спираль из пикселей и вращает ее.
-![biting-canvans](https://i.imgur.com/2H7Lp1v.gif)
+![magic-spiral](https://i.imgur.com/2H7Lp1v.gif)
 
 ### space-jump
 Рисует пиксели и откидывает их от центра.
-![biting-canvans](https://i.imgur.com/iCMnS5M.gif)
+![space-jump](https://i.imgur.com/iCMnS5M.gif)
+
+## really rain
+Рисует пиксельный дождик.
+![really-rain]((https://i.imgur.com/vr7Lcbf.gifv)
