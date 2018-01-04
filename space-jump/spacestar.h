@@ -35,11 +35,14 @@ private:
 	float angle; // Угол (для функции отображения, абстрактен)
 	bool side; // Лево/право
 public:
-	SpaceStar() { // Конструктор 
-		x_ = 0, y_ = 0, progress_ = 0; 
+	inline void restartStar() { // Обнуляет звезду
+		x_ = 0, y_ = 0, progress_ = 0;
 		angle = std::rand() % 360; // Рандомный угол
 		side = std::rand() % 2; // Рандомная сторона
 		speed = 100.0f / (std::rand() % 600 + 200); // Рандомная скорость
+	}
+	SpaceStar() { // Конструктор 
+		restartStar();
 	};
 	void draw() { drawPixel(x_, y_, 1.0f); } // Отрисовываем звезду
 	void update() {
@@ -53,11 +56,7 @@ public:
 
 		// Если звезда предположительно вышла за пределы экрана (а это не совсем так) - обнуляем
 		if (x_ > PIXEL_AMOUNT || y_ > PIXEL_AMOUNT) {
-			// Все то же, что в конструкторе (костыль!)
-			x_ = 0, y_ = 0, progress_ = 0;
-			angle = std::rand() % 360;
-			side = std::rand() % 2;
-			speed = 100.0f / (std::rand() % 600 + 200);
+			restartStar();
 		}
 	};
 }; 
