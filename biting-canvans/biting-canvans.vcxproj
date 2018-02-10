@@ -83,6 +83,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <PreBuildEvent>
+      <Message>
+      </Message>
+      <Command>copy "$(SolutionDir)depends\freeglut\bin\x86\freeglut.dll" "$(TargetDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -90,6 +95,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <PreBuildEvent>
+      <Message>
+      </Message>
+      <Command>copy "$(SolutionDir)depends\freeglut\bin\x64\freeglut.dll" "$(TargetDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
